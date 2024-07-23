@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Violin } from './violin/violin.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+  template: `<h2>Hi</h2>
+    <app-violin />
+    <h3>there</h3>`,
+  imports: [Violin],
+  styles: `
+    app-violin {
+      width: 600px;
+      height: 600px;
+    }
   `,
-  styles: [],
 })
 export class AppComponent {
   title = 'angular-three-shaders';
