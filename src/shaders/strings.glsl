@@ -8,12 +8,11 @@ uniform float onD;
 uniform float onA;
 uniform float onE;
 
-uniform vec2 rectPosition;
 uniform vec2 rectSize;
 
 void main()
 {
-    vec2 pos = (gl_FragCoord.xy - rectPosition) / rectSize;
+    vec2 pos = (gl_FragCoord.xy) / rectSize;
     pos = pos * 2.0 - 1.0;
 
     vec3 backgroundColor = vec3(0.082, 0.078, 0.122);

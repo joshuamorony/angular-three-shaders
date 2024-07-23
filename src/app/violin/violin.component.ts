@@ -31,9 +31,6 @@ import { SceneGraph } from './scene-graph';
 })
 export class Violin {
   sceneGraph = SceneGraph;
-  aspectRatio = 1;
-  frustrumHeight = 1;
-  frustrumWidth = this.frustrumHeight * this.aspectRatio;
 
   constructor() {}
 }

@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   CUSTOM_ELEMENTS_SCHEMA,
   signal,
 } from '@angular/core';
@@ -50,9 +49,6 @@ export class SceneGraph {
 
   uniforms = {
     time: { value: 0 },
-    rectPosition: {
-      value: new THREE.Vector2(0, 0),
-    },
     rectSize: {
       value: new THREE.Vector2(this.violinWidth, this.violinHeight),
     },
