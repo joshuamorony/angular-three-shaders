@@ -30,8 +30,8 @@ export class SceneInputs {
         right: 1,
         top: 1,
         bottom: 0,
-        near: 0.1,
-        far: 1000
+        near: 1,
+        far: 1.1
       }"
     />
   `,

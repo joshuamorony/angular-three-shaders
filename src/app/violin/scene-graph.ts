@@ -41,7 +41,6 @@ export class SceneGraph {
   sceneInputs = inject(SceneInputs);
   store = injectStore();
   viewport = this.store.select('viewport');
-  worldPosition = signal({ x: 0, y: 0 });
   violinWidth = this.viewport().width;
   violinHeight = this.viewport().height;
   fragmentShader = fragmentShader;
