@@ -1,6 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Injectable,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { NgtCanvas } from 'angular-three';
 import { SceneGraph } from './scene-graph';
+
+export type ViolinActiveString = 'g' | 'd' | 'a' | 'e' | null;
+
+@Injectable()
+export class SceneInputs {
+  activeString = signal<ViolinActiveString>(null);
+}
 
 @Component({
   selector: 'app-violin',
@@ -28,9 +43,20 @@ import { SceneGraph } from './scene-graph';
     }
   `,
   imports: [NgtCanvas],
+  providers: [SceneInputs],
 })
 export class Violin {
   sceneGraph = SceneGraph;
+  activeString = input<ViolinActiveString>(null);
 
-  constructor() {}
+  sceneInputs = inject(SceneInputs);
+
+  constructor() {
+    effect(
+      () => {
+        this.sceneInputs.activeString.set(this.activeString());
+      },
+      { allowSignalWrites: true },
+    );
+  }
 }

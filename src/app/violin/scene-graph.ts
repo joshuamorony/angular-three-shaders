@@ -1,7 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   CUSTOM_ELEMENTS_SCHEMA,
+  effect,
+  inject,
   signal,
 } from '@angular/core';
 import {
@@ -13,6 +16,7 @@ import {
 } from 'angular-three';
 import * as THREE from 'three';
 import fragmentShader from '../../shaders/strings.glsl';
+import { SceneInputs } from './violin.component';
 
 extend(THREE);
 
@@ -34,18 +38,18 @@ extend(THREE);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SceneGraph {
+  sceneInputs = inject(SceneInputs);
   store = injectStore();
   viewport = this.store.select('viewport');
   worldPosition = signal({ x: 0, y: 0 });
   violinWidth = this.viewport().width * 2;
   violinHeight = this.viewport().height * 2;
-
-  onG = signal(0.0);
-  onD = signal(0.0);
-  onA = signal(1.0);
-  onE = signal(0.0);
-
   fragmentShader = fragmentShader;
+
+  onG = computed(() => (this.sceneInputs.activeString() === 'g' ? 1.0 : 0.0));
+  onD = computed(() => (this.sceneInputs.activeString() === 'd' ? 1.0 : 0.0));
+  onA = computed(() => (this.sceneInputs.activeString() === 'a' ? 1.0 : 0.0));
+  onE = computed(() => (this.sceneInputs.activeString() === 'e' ? 1.0 : 0.0));
 
   uniforms = {
     time: { value: 0 },
