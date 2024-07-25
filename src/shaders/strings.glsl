@@ -13,16 +13,16 @@ uniform vec2 rectSize;
 void main()
 {
     vec2 pos = (gl_FragCoord.xy) / rectSize;
-    pos = pos * 2.0 - 1.0;
+    pos = pos - 1.0;
 
     vec3 backgroundColor = vec3(0.082, 0.078, 0.122);
 
-    float segmentWidth = 2.0 / 4.0;
-    int segment = int(clamp((pos.x + 1.0) / segmentWidth, 0.0, 4.0 - 1.0));
-    pos.x = mod(pos.x + 1.0, segmentWidth) / segmentWidth * 2.0 - 1.0;
+    float segmentWidth = 0.5;
+    int segment = int(clamp((pos.x + 1.0) / segmentWidth, 0.0, 3.0));
+    pos.x = mod(pos.x, segmentWidth) / segmentWidth * 2.0 - 1.0;
 
     vec3 colour = vec3(0.0);
-    float x = 2.0 * PI * pos.y;
+    float x = PI * pos.y;
     float val = 0.0;
     float amplitude = 0.05;
     float frequency = 1.8 * PI;

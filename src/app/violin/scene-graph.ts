@@ -23,8 +23,8 @@ extend(THREE);
 @Component({
   standalone: true,
   template: `
-    <ngt-mesh [position]="[0, 0, 0]">
-      <ngt-plane-geometry *args="[violinWidth, violinHeight]" />
+    <ngt-mesh>
+      <ngt-plane-geometry *args="[2, 2]" />
       <ngt-shader-material [parameters]="{ uniforms, fragmentShader }">
         <ngt-value [rawValue]="onG()" attach="uniforms.onG.value" />
         <ngt-value [rawValue]="onD()" attach="uniforms.onD.value" />
@@ -42,8 +42,8 @@ export class SceneGraph {
   store = injectStore();
   viewport = this.store.select('viewport');
   worldPosition = signal({ x: 0, y: 0 });
-  violinWidth = this.viewport().width * 2;
-  violinHeight = this.viewport().height * 2;
+  violinWidth = this.viewport().width;
+  violinHeight = this.viewport().height;
   fragmentShader = fragmentShader;
 
   onG = computed(() => (this.sceneInputs.activeString() === 'g' ? 1.0 : 0.0));
