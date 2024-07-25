@@ -3,9 +3,7 @@ import {
   Component,
   computed,
   CUSTOM_ELEMENTS_SCHEMA,
-  effect,
   inject,
-  signal,
 } from '@angular/core';
 import {
   extend,
@@ -15,8 +13,8 @@ import {
   type NgtRenderState,
 } from 'angular-three';
 import * as THREE from 'three';
-import fragmentShader from '../../shaders/strings.glsl';
 import { SceneInputs } from './violin.component';
+import fragmentShader from '../../shaders/strings.glsl';
 
 extend(THREE);
 
