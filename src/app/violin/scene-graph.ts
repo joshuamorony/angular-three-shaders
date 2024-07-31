@@ -13,7 +13,7 @@ import {
   type NgtRenderState,
 } from 'angular-three';
 import * as THREE from 'three';
-import { SceneInputs } from './violin.component';
+import { Violin } from './violin.component';
 import fragmentShader from '../../shaders/strings.glsl';
 
 extend(THREE);
@@ -36,22 +36,22 @@ extend(THREE);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SceneGraph {
-  sceneInputs = inject(SceneInputs);
+  violin = inject(Violin);
   store = injectStore();
-  viewport = this.store.select('viewport');
-  violinWidth = this.viewport().width;
-  violinHeight = this.viewport().height;
   fragmentShader = fragmentShader;
 
-  onG = computed(() => (this.sceneInputs.activeString() === 'g' ? 1.0 : 0.0));
-  onD = computed(() => (this.sceneInputs.activeString() === 'd' ? 1.0 : 0.0));
-  onA = computed(() => (this.sceneInputs.activeString() === 'a' ? 1.0 : 0.0));
-  onE = computed(() => (this.sceneInputs.activeString() === 'e' ? 1.0 : 0.0));
+  onG = computed(() => (this.violin.activeString() === 'g' ? 1.0 : 0.0));
+  onD = computed(() => (this.violin.activeString() === 'd' ? 1.0 : 0.0));
+  onA = computed(() => (this.violin.activeString() === 'a' ? 1.0 : 0.0));
+  onE = computed(() => (this.violin.activeString() === 'e' ? 1.0 : 0.0));
 
   uniforms = {
     time: { value: 0 },
     rectSize: {
-      value: new THREE.Vector2(this.violinWidth, this.violinHeight),
+      value: new THREE.Vector2(
+        this.store.snapshot.viewport.width,
+        this.store.snapshot.viewport.height
+      ),
     },
     onG: { value: this.onG() },
     onD: { value: this.onD() },
